@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import { MapPin, Phone, Mail, Clock, AlertTriangle, ShieldCheck } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, ShieldCheck } from 'lucide-react';
 import { CLINIC_CONFIG } from '@/lib/config/clinic';
 
 export const metadata = {
@@ -23,17 +23,6 @@ export default function ContactPage() {
         <p className="text-slate-600 mt-2 max-w-2xl text-sm sm:text-base leading-relaxed">
           Chúng tôi luôn sẵn sàng đón tiếp và hỗ trợ bạn trong suốt quá trình thăm khám tại Wellora Healthcare.
         </p>
-      </div>
-
-      {/* Emergency Alert Box */}
-      <div className="p-4 rounded-xl border border-status-warning-border bg-status-warning-bg text-amber-900 text-sm flex gap-3 shadow-2xs">
-        <AlertTriangle className="w-5 h-5 text-status-warning flex-shrink-0 mt-0.5" />
-        <div className="space-y-1">
-          <div className="font-semibold">Lưu ý về các trường hợp khẩn cấp</div>
-          <div className="text-xs leading-relaxed text-amber-800">
-            {CLINIC_CONFIG.emergencyNotice}
-          </div>
-        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">

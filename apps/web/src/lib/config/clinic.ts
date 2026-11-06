@@ -4,7 +4,6 @@ export const CLINIC_CONFIG = {
   hotline: '1900 8888',
   phoneDisplay: '1900 8888 (08:00 - 17:30)',
   email: 'contact@wellora.vn',
-  emergencyNotice: 'Lưu ý: Wellora không tiếp nhận xử lý cấp cứu khẩn cấp. Trong trường hợp khẩn cấp, vui lòng gọi 115 hoặc đến bệnh viện gần nhất.',
   locations: [
     {
       id: 'center',

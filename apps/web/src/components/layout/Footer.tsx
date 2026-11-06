@@ -1,20 +1,12 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { MapPin, Phone, Mail, Clock, ShieldCheck, AlertCircle } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, ShieldCheck } from 'lucide-react';
 import { CLINIC_CONFIG } from '@/lib/config/clinic';
 
 export const Footer: React.FC = () => {
   return (
     <footer className="bg-brand-950 text-slate-300 border-t border-brand-900 mt-20">
-      {/* Notice bar */}
-      <div className="bg-brand-900/80 border-b border-brand-900 py-3">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-xs text-amber-200 flex items-center justify-center gap-2 text-center font-medium">
-          <AlertCircle className="w-4 h-4 text-amber-300 flex-shrink-0" />
-          <span>{CLINIC_CONFIG.emergencyNotice}</span>
-        </div>
-      </div>
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           {/* Brand & mission */}
