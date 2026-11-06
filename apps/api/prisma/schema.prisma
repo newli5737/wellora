@@ -1,0 +1,200 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum UserRole {
+  ADMIN
+  MANAGER
+  STAFF
+  PRACTITIONER
+}
+
+enum AppointmentStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+  NO_SHOW
+}
+
+model Location {
+  id                     String                  @id @default(uuid())
+  name                   String
+  slug                   String                  @unique
+  address                String?
+  phone                  String?
+  timezone               String                  @default("Asia/Ho_Chi_Minh")
+  isActive               Boolean                 @default(true)
+  createdAt              DateTime                @default(now())
+  updatedAt              DateTime                @updatedAt
+
+  workingHours           WorkingHours[]
+  availabilityExceptions AvailabilityException[]
+  appointments           Appointment[]
+
+  @@map("locations")
+}
+
+model User {
+  id           String        @id @default(uuid())
+  email        String        @unique
+  passwordHash String
+  role         UserRole      @default(STAFF)
+  isActive     Boolean       @default(true)
+  lastLoginAt  DateTime?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  practitioner Practitioner?
+
+  @@map("users")
+}
+
+model Patient {
+  id           String        @id @default(uuid())
+  fullName     String
+  phone        String
+  email        String?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  appointments Appointment[]
+
+  @@map("patients")
+}
+
+model Practitioner {
+  id                     String                  @id @default(uuid())
+  userId                 String?                 @unique
+  displayName            String
+  bio                    String?
+  photoUrl               String?
+  isBookable             Boolean                 @default(true)
+  isPublished            Boolean                 @default(true)
+  createdAt              DateTime                @default(now())
+  updatedAt              DateTime                @updatedAt
+
+  user                   User?                   @relation(fields: [userId], references: [id], onDelete: SetNull)
+  services               PractitionerService[]
+  workingHours           WorkingHours[]
+  availabilityExceptions AvailabilityException[]
+  appointments           Appointment[]
+
+  @@map("practitioners")
+}
+
+model Service {
+  id                  String                @id @default(uuid())
+  name                String
+  slug                String                @unique
+  description         String?
+  durationMinutes     Int                   // > 0
+  bufferBeforeMinutes Int                   @default(0)
+  bufferAfterMinutes  Int                   @default(0)
+  priceMinor          Int?                  // In smallest currency unit (VND), nullable if unconfirmed
+  currency            String                @default("VND")
+  isActive            Boolean               @default(true)
+  isPublished         Boolean               @default(true)
+  createdAt           DateTime              @default(now())
+  updatedAt           DateTime              @updatedAt
+
+  practitioners       PractitionerService[]
+  appointments        Appointment[]
+
+  @@map("services")
+}
+
+model PractitionerService {
+  practitionerId String
+  serviceId      String
+  createdAt      DateTime     @default(now())
+
+  practitioner   Practitioner @relation(fields: [practitionerId], references: [id], onDelete: Cascade)
+  service        Service      @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+
+  @@id([practitionerId, serviceId])
+  @@map("practitioner_services")
+}
+
+model WorkingHours {
+  id             String        @id @default(uuid())
+  practitionerId String?
+  locationId     String?
+  weekday        Int           // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+  startTime      String        // "HH:mm" e.g. "08:00"
+  endTime        String        // "HH:mm" e.g. "17:30"
+  effectiveFrom  DateTime?
+  effectiveTo    DateTime?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  practitioner   Practitioner? @relation(fields: [practitionerId], references: [id], onDelete: Cascade)
+  location       Location?     @relation(fields: [locationId], references: [id], onDelete: Cascade)
+
+  @@map("working_hours")
+}
+
+model AvailabilityException {
+  id             String        @id @default(uuid())
+  practitionerId String?
+  locationId     String?
+  startDate      DateTime      @db.Timestamptz(6)
+  endDate        DateTime      @db.Timestamptz(6)
+  isUnavailable  Boolean       @default(true)
+  reason         String?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  practitioner   Practitioner? @relation(fields: [practitionerId], references: [id], onDelete: Cascade)
+  location       Location?     @relation(fields: [locationId], references: [id], onDelete: Cascade)
+
+  @@map("availability_exceptions")
+}
+
+model Appointment {
+  id                 String            @id @default(uuid())
+  reference          String            @unique
+  patientId          String
+  serviceId          String
+  locationId         String
+  practitionerId     String?
+  startsAt           DateTime          @db.Timestamptz(6)
+  endsAt             DateTime          @db.Timestamptz(6)
+  status             AppointmentStatus @default(PENDING)
+  patientNote        String?
+  cancellationReason String?
+  createdBy          String            @default("PUBLIC")
+  createdAt          DateTime          @default(now())
+  updatedAt          DateTime          @updatedAt
+
+  patient            Patient           @relation(fields: [patientId], references: [id], onDelete: Restrict)
+  service            Service           @relation(fields: [serviceId], references: [id], onDelete: Restrict)
+  location           Location          @relation(fields: [locationId], references: [id], onDelete: Restrict)
+  practitioner       Practitioner?     @relation(fields: [practitionerId], references: [id], onDelete: SetNull)
+
+  @@index([practitionerId, startsAt, endsAt])
+  @@index([locationId, startsAt, endsAt])
+  @@index([startsAt, status])
+  @@map("appointments")
+}
+
+model AuditEvent {
+  id         String   @id @default(uuid())
+  actorId    String?
+  actorRole  String?
+  action     String
+  entityType String
+  entityId   String
+  metadata   String?  // JSON string with redacted PII
+  requestId  String?
+  createdAt  DateTime @default(now())
+
+  @@index([entityType, entityId])
+  @@index([createdAt])
+  @@map("audit_events")
+}

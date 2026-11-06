@@ -1,0 +1,53 @@
+:root {
+  /* Brand colors derived from Wellora logo (Teal/Cyan/Navy on dark) */
+  --brand-950: #05131a;
+  --brand-900: #0c212b;
+  --brand-800: #123242;
+  --brand-700: #0e536d;
+  --brand-600: #087ea4;
+  --brand-500: #06b6d4;
+  --brand-400: #22d3ee;
+  --brand-300: #67e8f9;
+  --brand-200: #a5f3fc;
+  --brand-100: #cffafe;
+  --brand-50:  #ecfeff;
+
+  /* Surfaces */
+  --surface-canvas: #f8fafc;
+  --surface-raised: #ffffff;
+  --surface-subtle: #f1f5f9;
+  --surface-dark: #071720;
+  --surface-dark-elevated: #0f2735;
+
+  /* Typography */
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+  --text-inverse: #f8fafc;
+  --text-inverse-muted: #94a3b8;
+
+  /* Borders */
+  --border-default: #e2e8f0;
+  --border-subtle: #cbd5e1;
+  --border-dark: #1e3a4a;
+
+  /* Semantic */
+  --status-success: #059669;
+  --status-success-bg: #ecfdf5;
+  --status-success-border: #a7f3d0;
+
+  --status-warning: #d97706;
+  --status-warning-bg: #fffbeb;
+  --status-warning-border: #fde68a;
+
+  --status-danger: #dc2626;
+  --status-danger-bg: #fef2f2;
+  --status-danger-border: #fecaca;
+
+  --status-info: #0284c7;
+  --status-info-bg: #f0f9ff;
+  --status-info-border: #bae6fd;
+
+  /* Focus ring */
+  --ring-focus: #06b6d4;
+}

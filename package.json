@@ -1,0 +1,30 @@
+{
+  "name": "wellora-monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev:api": "npm --workspace=apps/api run start:dev",
+    "dev:web": "npm --workspace=apps/web run dev",
+    "build:api": "npm --workspace=apps/api run build",
+    "build:web": "npm --workspace=apps/web run build",
+    "build": "npm run build:api && npm run build:web",
+    "test:api": "npm --workspace=apps/api run test",
+    "test:web": "npm --workspace=apps/web run test",
+    "test": "npm run test:api && npm run test:web",
+    "typecheck:api": "npm --workspace=apps/api run typecheck",
+    "typecheck:web": "npm --workspace=apps/web run typecheck",
+    "typecheck": "npm run typecheck:api && npm run typecheck:web",
+    "lint:api": "npm --workspace=apps/api run lint",
+    "lint:web": "npm --workspace=apps/web run lint",
+    "lint": "npm run lint:api && npm run lint:web",
+    "db:generate": "npm --workspace=apps/api run db:generate",
+    "db:migrate": "npm --workspace=apps/api run db:migrate",
+    "db:seed": "npm --workspace=apps/api run db:seed"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3"
+  }
+}
