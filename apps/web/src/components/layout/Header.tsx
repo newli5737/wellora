@@ -80,15 +80,15 @@ export const Header: React.FC = () => {
           <div className="hidden sm:flex items-center gap-3">
             <Link
               href="/dat-lich/xac-nhan"
-              className="text-xs text-slate-400 hover:text-slate-200 px-2 py-1 transition-colors"
+              className="text-xs text-slate-300 hover:text-white px-2.5 py-1.5 transition-colors font-medium"
             >
               Tra cứu lịch
             </Link>
             <Link
               href="/dat-lich"
-              className="inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-500 text-white text-sm font-semibold px-4 py-2.5 rounded transition-colors shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
+              className="inline-flex items-center gap-2 bg-teal-400 hover:bg-teal-300 text-slate-950 text-sm font-bold px-4 py-2.5 rounded-lg transition-colors shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-300"
             >
-              <Calendar className="w-4 h-4" />
+              <Calendar className="w-4 h-4 text-slate-950" />
               Đặt lịch hẹn
             </Link>
           </div>

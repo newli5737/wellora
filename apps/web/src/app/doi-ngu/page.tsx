@@ -31,7 +31,7 @@ export default async function TeamPage() {
           <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-white">
             Đội ngũ bác sĩ & Chuyên viên y tế
           </h1>
-          <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+          <p className="text-slate-200 text-sm sm:text-base leading-relaxed">
             Đội ngũ chuyên gia tại Wellora được đào tạo chuẩn mực, giàu kinh nghiệm thực tiễn và luôn tận tụy đồng hành cùng sức khỏe của bạn và gia đình.
           </p>
         </div>
@@ -68,14 +68,14 @@ export default async function TeamPage() {
 
               <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
                 <div className="space-y-2.5">
-                  <div className="flex items-center gap-1.5 text-xs text-brand-700 font-semibold uppercase tracking-wider">
-                    <Stethoscope className="w-3.5 h-3.5" />
+                  <div className="flex items-center gap-1.5 text-xs text-brand-800 font-bold uppercase tracking-wider">
+                    <Stethoscope className="w-3.5 h-3.5 text-brand-700" />
                     <span>Bác sĩ chuyên khoa</span>
                   </div>
                   <h2 className="text-xl font-bold text-slate-900">
                     {doc.displayName}
                   </h2>
-                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed pt-1">
+                  <p className="text-xs sm:text-sm text-slate-700 leading-relaxed pt-1">
                     {doc.bio || 'Chuyên gia y tế tận tâm tại Wellora Healthcare.'}
                   </p>
                 </div>
@@ -83,7 +83,7 @@ export default async function TeamPage() {
                 <div className="pt-4 border-t border-slate-100">
                   <Link
                     href={`/dat-lich?practitionerId=${doc.id}`}
-                    className="w-full inline-flex items-center justify-center gap-2 bg-brand-700 hover:bg-brand-800 text-white font-medium py-2.5 px-4 rounded-lg text-xs transition-colors shadow-xs"
+                    className="w-full inline-flex items-center justify-center gap-2 bg-brand-700 hover:bg-brand-800 text-white font-semibold py-2.5 px-4 rounded-lg text-xs transition-colors shadow-xs"
                   >
                     <Calendar className="w-3.5 h-3.5" />
                     Đặt lịch với {doc.displayName}

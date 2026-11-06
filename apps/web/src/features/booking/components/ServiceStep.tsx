@@ -89,7 +89,7 @@ export const ServiceStep: React.FC<ServiceStepProps> = ({
                       {service.name}
                     </span>
                   </div>
-                  <p className="text-xs text-slate-600 pl-6 line-clamp-2">
+                  <p className="text-xs text-slate-700 pl-6 line-clamp-2">
                     {service.description}
                   </p>
                 </div>
@@ -99,8 +99,8 @@ export const ServiceStep: React.FC<ServiceStepProps> = ({
                 <span className="font-bold text-brand-700 text-base">
                   {formatCurrency(service.priceMinor, service.currency)}
                 </span>
-                <span className="text-xs text-slate-500 flex items-center gap-1">
-                  <Clock className="w-3.5 h-3.5 text-brand-600" /> {service.durationMinutes} phút
+                <span className="text-xs text-slate-700 font-medium flex items-center gap-1">
+                  <Clock className="w-3.5 h-3.5 text-brand-700" /> {service.durationMinutes} phút
                 </span>
               </div>
             </div>

@@ -44,49 +44,49 @@ export default async function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             {/* Left Column: Headline and Call-to-actions */}
             <div className="lg:col-span-7 space-y-6">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-900/90 border border-brand-700/60 text-brand-300 text-xs font-medium">
-                <ShieldCheck className="w-4 h-4 text-brand-400" />
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-teal-950/90 border border-teal-500/40 text-teal-200 text-xs font-medium tracking-wide">
+                <ShieldCheck className="w-4 h-4 text-teal-400" />
                 Y học gia đình & Chăm sóc phòng ngừa chuẩn mực
               </div>
 
-              <h1 className="text-3xl sm:text-5xl lg:text-5xl font-semibold tracking-tight text-white leading-[1.15]">
+              <h1 className="text-3xl sm:text-5xl lg:text-5xl font-semibold tracking-tight text-white leading-[1.18]">
                 Chăm sóc sức khỏe y khoa bình tĩnh, tận tâm và đúng hẹn.
               </h1>
 
-              <p className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl">
+              <p className="text-base sm:text-lg text-slate-200 leading-relaxed max-w-2xl font-normal">
                 Wellora mang đến không gian y tế thanh tịnh, nơi người bệnh được lắng nghe cặn kẽ và tôn trọng thời gian bằng quy trình quản trị lịch hẹn minh bạch.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 pt-2">
                 <Link
                   href="/dat-lich"
-                  className="inline-flex items-center justify-center gap-2 bg-brand-600 hover:bg-brand-500 text-white font-medium px-6 py-3.5 rounded transition-colors text-base shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
+                  className="inline-flex items-center justify-center gap-2.5 bg-teal-400 hover:bg-teal-300 text-slate-950 font-bold px-6 py-3.5 rounded-lg transition-colors text-base shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-300"
                 >
-                  <Calendar className="w-5 h-5" />
+                  <Calendar className="w-5 h-5 text-slate-950" />
                   Đặt lịch khám trực tuyến
                 </Link>
                 <Link
                   href="/dich-vu"
-                  className="inline-flex items-center justify-center gap-2 bg-brand-900/70 hover:bg-brand-900 text-slate-200 border border-brand-800 font-medium px-6 py-3.5 rounded transition-colors text-base"
+                  className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/15 text-white border border-white/20 hover:border-white/40 font-medium px-6 py-3.5 rounded-lg transition-colors text-base"
                 >
                   Xem danh mục dịch vụ
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>
 
-              <div className="pt-4 flex flex-wrap items-center gap-6 text-xs text-slate-400 border-t border-brand-900/80">
-                <span className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-brand-400" /> Đúng giờ hẹn — Không chờ đợi mệt mỏi
+              <div className="pt-4 flex flex-wrap items-center gap-6 text-sm text-slate-200 border-t border-slate-800">
+                <span className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-teal-400 flex-shrink-0" /> Đúng giờ hẹn — Không chờ đợi mệt mỏi
                 </span>
-                <span className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-brand-400" /> Bác sĩ chuyên khoa y học gia đình
+                <span className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-teal-400 flex-shrink-0" /> Bác sĩ chuyên khoa y học gia đình
                 </span>
               </div>
             </div>
 
-            {/* Right Column: Real Clinic Photography with Ambient Card */}
-            <div className="lg:col-span-5 relative">
-              <div className="relative rounded-2xl overflow-hidden border border-brand-800/80 shadow-2xl aspect-[4/3] sm:aspect-[16/11]">
+            {/* Right Column: Real Clinic Photography with High-Contrast Solid Caption Card */}
+            <div className="lg:col-span-5 relative space-y-3">
+              <div className="relative rounded-2xl overflow-hidden border border-slate-800 shadow-2xl aspect-[16/11]">
                 <Image
                   src="/images/clinic/hero-clinic.jpg"
                   alt="Không gian phòng khám hiện đại và yên tĩnh tại Wellora Healthcare"
@@ -94,23 +94,22 @@ export default async function HomePage() {
                   priority
                   className="object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-brand-950/80 via-transparent to-transparent" />
-                
-                {/* Floating highlight badge */}
-                <div className="absolute bottom-4 left-4 right-4 bg-brand-950/90 backdrop-blur-md border border-brand-800 p-3.5 rounded-xl flex items-center justify-between text-xs">
-                  <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-full bg-brand-800 flex items-center justify-center text-brand-300">
-                      <Clock className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <div className="font-semibold text-white">Khung giờ đúng hẹn</div>
-                      <div className="text-slate-400 text-[11px]">30 – 45 phút thăm khám kỹ lưỡng</div>
-                    </div>
+              </div>
+
+              {/* Solid high-contrast clinical commitment badge - completely eliminating blur & low-contrast grey */}
+              <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 flex items-center justify-between shadow-lg">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-lg bg-teal-500/20 text-teal-400 border border-teal-500/30 flex items-center justify-center flex-shrink-0">
+                    <Clock className="w-5 h-5" />
                   </div>
-                  <span className="text-[11px] font-medium text-brand-300 bg-brand-900 px-2 py-1 rounded">
-                    Tiêu chuẩn y khoa
-                  </span>
+                  <div>
+                    <div className="font-semibold text-white text-sm">Khung giờ đúng hẹn</div>
+                    <div className="text-slate-200 text-xs font-medium mt-0.5">30 – 45 phút thăm khám kỹ lưỡng</div>
+                  </div>
                 </div>
+                <span className="text-xs font-semibold text-teal-300 bg-teal-950 border border-teal-700/60 px-2.5 py-1 rounded">
+                  Tiêu chuẩn y khoa
+                </span>
               </div>
             </div>
           </div>
@@ -119,22 +118,16 @@ export default async function HomePage() {
 
       {/* Facilities & Calm Atmosphere Showcase */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row md:items-end justify-between pb-8 mb-8 border-b border-border-default gap-4">
-          <div className="max-w-2xl">
-            <div className="text-xs font-semibold uppercase tracking-wider text-brand-700 mb-1">
-              Cơ sở vật chất chuẩn mực
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 tracking-tight">
-              Không gian y tế tĩnh tại, ngập tràn ánh sáng tự nhiên
-            </h2>
-            <p className="text-slate-600 mt-2 text-sm sm:text-base leading-relaxed">
-              Môi trường phòng khám được thiết kế tối giản, sạch khuẩn và cách âm tốt nhằm giảm thiểu cảm giác căng thẳng thường thấy tại các bệnh viện đông đúc.
-            </p>
+        <div className="pb-8 mb-8 border-b border-border-default space-y-2">
+          <div className="text-xs font-bold uppercase tracking-wider text-brand-700">
+            Cơ sở vật chất chuẩn mực
           </div>
-          <div className="flex items-center gap-2 text-xs text-slate-500">
-            <Building2 className="w-4 h-4 text-brand-700" />
-            <span>Phòng khám đa khoa Wellora — Cơ sở trung tâm</span>
-          </div>
+          <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 tracking-tight">
+            Không gian y tế tĩnh tại, ngập tràn ánh sáng tự nhiên
+          </h2>
+          <p className="text-slate-600 text-sm sm:text-base leading-relaxed max-w-3xl">
+            Môi trường phòng khám được thiết kế tối giản, sạch khuẩn và cách âm tốt nhằm giảm thiểu cảm giác căng thẳng thường thấy tại các bệnh viện đông đúc.
+          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -248,14 +241,14 @@ export default async function HomePage() {
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
-                    <div className="absolute top-3 right-3 bg-white/95 backdrop-blur-sm px-2.5 py-1 rounded text-xs font-semibold text-brand-700 shadow-sm">
+                    <div className="absolute top-3 right-3 bg-slate-900 text-white font-bold text-xs px-3 py-1.5 rounded-md shadow-sm">
                       {formatCurrency(service.priceMinor, service.currency)}
                     </div>
                   </div>
 
                   <div className="p-6 space-y-3">
-                    <div className="flex items-center gap-1.5 text-xs text-slate-500">
-                      <Clock className="w-3.5 h-3.5 text-brand-600" />
+                    <div className="flex items-center gap-1.5 text-xs text-slate-700 font-medium">
+                      <Clock className="w-3.5 h-3.5 text-brand-700" />
                       <span>Thời lượng khám: <strong>{service.durationMinutes} phút</strong></span>
                     </div>
 
@@ -439,19 +432,19 @@ export default async function HomePage() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10">
         <div className="bg-brand-950 text-white rounded-2xl p-8 sm:p-12 border border-brand-900 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
           <div className="space-y-2 text-center sm:text-left">
-            <h2 className="text-2xl sm:text-3xl font-semibold">
+            <h2 className="text-2xl sm:text-3xl font-semibold text-white">
               Bắt đầu chăm sóc sức khỏe của bạn ngay hôm nay
             </h2>
-            <p className="text-sm text-slate-300 max-w-xl">
+            <p className="text-sm sm:text-base text-slate-200 max-w-xl">
               Chọn dịch vụ và khung giờ phù hợp để được thăm khám chuẩn mực cùng đội ngũ y tế Wellora.
             </p>
           </div>
           <div className="flex-shrink-0">
             <Link
               href="/dat-lich"
-              className="inline-flex items-center gap-2 bg-brand-500 hover:bg-brand-400 text-slate-950 font-semibold px-6 py-3.5 rounded-lg text-sm transition-colors shadow"
+              className="inline-flex items-center gap-2 bg-teal-400 hover:bg-teal-300 text-slate-950 font-bold px-6 py-3.5 rounded-lg text-sm transition-colors shadow"
             >
-              <Calendar className="w-4 h-4" />
+              <Calendar className="w-4 h-4 text-slate-950" />
               Đặt lịch trực tuyến ngay
             </Link>
           </div>

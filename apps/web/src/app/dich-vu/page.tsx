@@ -32,7 +32,7 @@ export default async function ServicesPage() {
           <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-white">
             Danh mục dịch vụ thăm khám
           </h1>
-          <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+          <p className="text-slate-200 text-sm sm:text-base leading-relaxed">
             Wellora cung cấp các gói dịch vụ chăm sóc sức khỏe ban đầu, sàng lọc và theo dõi định kỳ với thời lượng thăm khám đủ sâu và tư vấn phác đồ cá nhân hóa.
           </p>
         </div>
@@ -58,14 +58,14 @@ export default async function ServicesPage() {
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className="absolute top-3 right-3 bg-white/95 backdrop-blur-sm px-2.5 py-1 rounded text-xs font-bold text-brand-700 shadow-xs">
+                  <div className="absolute top-3 right-3 bg-slate-900 text-white font-bold text-xs px-3 py-1.5 rounded-md shadow-sm">
                     {formatCurrency(service.priceMinor, service.currency)}
                   </div>
                 </div>
 
                 <div className="p-6 space-y-3">
-                  <div className="flex items-center gap-1.5 text-xs text-slate-500">
-                    <Clock className="w-3.5 h-3.5 text-brand-600" />
+                  <div className="flex items-center gap-1.5 text-xs text-slate-700 font-medium">
+                    <Clock className="w-3.5 h-3.5 text-brand-700" />
                     <span>Thời lượng: <strong>{service.durationMinutes} phút</strong></span>
                   </div>
 
@@ -75,7 +75,7 @@ export default async function ServicesPage() {
                     </Link>
                   </h2>
 
-                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed line-clamp-3">
+                  <p className="text-xs sm:text-sm text-slate-700 leading-relaxed line-clamp-3">
                     {service.description || 'Thăm khám và tư vấn chuyên sâu cùng bác sĩ chuyên khoa.'}
                   </p>
                 </div>
