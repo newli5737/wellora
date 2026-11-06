@@ -90,3 +90,4 @@ export class PublicController {
     return this.publicService.getAppointmentStatus(reference);
   }
 }
+

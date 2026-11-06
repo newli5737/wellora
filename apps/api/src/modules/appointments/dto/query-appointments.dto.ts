@@ -49,3 +49,4 @@ export class QueryAppointmentsDto {
   @IsOptional()
   pageSize: number = 20;
 }
+

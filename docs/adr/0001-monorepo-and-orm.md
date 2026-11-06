@@ -20,3 +20,4 @@ Các yêu cầu kỹ thuật chốt trong `docs/implementation-guide.md`:
 - Đảm bảo tính nhất quán giữa API và Web, không trộn lẫn ORM hay build tools.
 - API là nguồn sự thật duy nhất (Single Source of Truth) cho dữ liệu, slot, và quy tắc nghiệp vụ.
 - Quy trình migration rõ ràng, có thể kiểm thử tự động và seed dữ liệu mẫu có nhãn.
+

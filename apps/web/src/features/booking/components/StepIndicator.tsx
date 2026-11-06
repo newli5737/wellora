@@ -62,3 +62,4 @@ export const StepIndicator: React.FC<StepIndicatorProps> = ({
     </nav>
   );
 };
+

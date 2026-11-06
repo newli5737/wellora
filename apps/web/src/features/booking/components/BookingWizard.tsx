@@ -148,3 +148,4 @@ export const BookingWizard: React.FC = () => {
     </div>
   );
 };
+

@@ -89,3 +89,4 @@ describe('AppointmentsService - Status Transitions', () => {
     ).rejects.toThrow(NotFoundException);
   });
 });
+

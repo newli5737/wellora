@@ -51,3 +51,4 @@ export class AppointmentsController {
     return this.appointmentsService.updateStatus(id, dto, user, requestId);
   }
 }
+

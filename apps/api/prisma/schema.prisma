@@ -198,3 +198,4 @@ model AuditEvent {
   @@index([createdAt])
   @@map("audit_events")
 }
+

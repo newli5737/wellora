@@ -6,3 +6,4 @@ import { AvailabilityService } from './availability.service';
   exports: [AvailabilityService],
 })
 export class AvailabilityModule {}
+

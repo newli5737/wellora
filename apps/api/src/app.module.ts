@@ -22,3 +22,4 @@ import { AppointmentsModule } from './modules/appointments/appointments.module';
   ],
 })
 export class AppModule {}
+

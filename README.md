@@ -97,3 +97,4 @@ npm run build
 1. **Logo & Thương hiệu**: Asset web `apps/web/public/images/brand/wellora-logo.png` được crop tối ưu tỷ lệ từ bản gốc `wellora_logo.png` (1536×1024 RGBA), giữ nguyên vẹn ánh sáng cyan/teal, đường nét và độ trong suốt của logo trên nền xanh đen (`brand-950`).
 2. **Khóa độc quyền chống đặt trùng slot (Concurrency Protection)**: Trong giao dịch `Prisma.$transaction`, hệ thống sử dụng khóa hàng độc quyền PostgreSQL (`SELECT ... FOR UPDATE` trên bảng `practitioners`) để tuần tự hóa các yêu cầu cạnh tranh cùng một khung giờ, loại bỏ hoàn toàn nguy cơ double-booking.
 3. **Bảo vệ quyền riêng tư**: Không lưu trữ chẩn đoán bệnh án trên website công khai; mã tham chiếu ngẫu nhiên không chứa PII; dữ liệu hiển thị có phân quyền rõ ràng.
+

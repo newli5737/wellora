@@ -62,3 +62,4 @@ export class CreateAppointmentDto {
   @IsNotEmpty({ message: 'Vui lòng đồng ý với chính sách và điều khoản' })
   consent!: boolean;
 }
+

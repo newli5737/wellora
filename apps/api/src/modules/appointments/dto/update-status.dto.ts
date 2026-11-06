@@ -14,3 +14,4 @@ export class UpdateAppointmentStatusDto {
   @MaxLength(300, { message: 'Lý do tối đa 300 ký tự' })
   reason?: string;
 }
+

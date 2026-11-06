@@ -10,3 +10,4 @@ import { AvailabilityModule } from '../availability/availability.module';
   exports: [PublicService],
 })
 export class PublicModule {}
+
