@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { MapPin, Phone, Mail, Clock, AlertTriangle, ShieldCheck } from 'lucide-react';
 import { CLINIC_CONFIG } from '@/lib/config/clinic';
 
@@ -25,7 +26,7 @@ export default function ContactPage() {
       </div>
 
       {/* Emergency Alert Box */}
-      <div className="p-4 rounded border border-status-warning-border bg-status-warning-bg text-amber-900 text-sm flex gap-3">
+      <div className="p-4 rounded-xl border border-status-warning-border bg-status-warning-bg text-amber-900 text-sm flex gap-3 shadow-2xs">
         <AlertTriangle className="w-5 h-5 text-status-warning flex-shrink-0 mt-0.5" />
         <div className="space-y-1">
           <div className="font-semibold">Lưu ý về các trường hợp khẩn cấp</div>
@@ -36,9 +37,18 @@ export default function ContactPage() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-        {/* Contact details */}
-        <div className="space-y-8">
-          <div className="border border-border-default bg-white rounded p-6 space-y-6">
+        {/* Contact details & Facility Photo */}
+        <div className="space-y-6">
+          <div className="relative aspect-[16/10] rounded-xl overflow-hidden border border-border-default shadow-xs">
+            <Image
+              src="/images/clinic/clinic-reception.jpg"
+              alt="Khu vực đón tiếp phòng khám Wellora"
+              fill
+              className="object-cover"
+            />
+          </div>
+
+          <div className="border border-border-default bg-white rounded-xl p-6 space-y-6 shadow-xs">
             <h2 className="text-lg font-semibold text-slate-900 border-b border-border-default pb-3">
               {loc.name}
             </h2>
@@ -72,7 +82,7 @@ export default function ContactPage() {
         </div>
 
         {/* Working Hours card */}
-        <div className="border border-border-default bg-white rounded p-6 space-y-6 h-fit">
+        <div className="border border-border-default bg-white rounded-xl p-6 space-y-6 h-fit shadow-xs">
           <h2 className="text-lg font-semibold text-slate-900 border-b border-border-default pb-3 flex items-center gap-2">
             <Clock className="w-5 h-5 text-brand-700" />
             Lịch làm việc chi tiết
@@ -93,7 +103,7 @@ export default function ContactPage() {
             </div>
           </div>
 
-          <div className="p-4 rounded bg-surface-subtle text-xs text-slate-600 leading-relaxed">
+          <div className="p-4 rounded-lg bg-surface-subtle text-xs text-slate-600 leading-relaxed border border-border-default">
             Khuyến khích quý khách đặt lịch trước ít nhất 2 giờ để phòng khám chuẩn bị hồ sơ và sắp xếp khung giờ tốt nhất cho bạn.
           </div>
         </div>
@@ -101,4 +111,3 @@ export default function ContactPage() {
     </div>
   );
 }
-

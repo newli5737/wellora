@@ -4,30 +4,36 @@ import * as bcrypt from 'bcryptjs';
 const prisma = new PrismaClient();
 
 async function main() {
-  if (process.env.NODE_ENV === 'production') {
+  if (process.env.NODE_ENV === 'production' && !process.env.ALLOW_SEED) {
     throw new Error('SEED CẢNH BÁO: Không được chạy seed dữ liệu mẫu trong môi trường production!');
   }
 
-  console.log('--- Bắt đầu Seeding dữ liệu phát triển (Dữ liệu mẫu) ---');
+  console.log('--- Bắt đầu Seeding dữ liệu phòng khám vào Cơ sở dữ liệu ---');
 
-  // 1. Tạo cơ sở phòng khám mẫu
+  // 1. Tạo cơ sở phòng khám
   const location = await prisma.location.upsert({
     where: { slug: 'wellora-trung-tam' },
-    update: {},
+    update: {
+      name: 'Wellora Healthcare — Cơ sở Trung tâm',
+      address: '123 Đại Lộ Sức Khỏe, Phường Bến Nghé, Quận 1, TP. Hồ Chí Minh',
+      phone: '1900 8888',
+      timezone: 'Asia/Ho_Chi_Minh',
+      isActive: true,
+    },
     create: {
-      name: 'Wellora Healthcare — Cơ sở Mẫu',
+      name: 'Wellora Healthcare — Cơ sở Trung tâm',
       slug: 'wellora-trung-tam',
-      address: '[Dữ liệu mẫu] 123 Đại Lộ Sức Khỏe, Quận 1, TP. Hồ Chí Minh',
+      address: '123 Đại Lộ Sức Khỏe, Phường Bến Nghé, Quận 1, TP. Hồ Chí Minh',
       phone: '1900 8888',
       timezone: 'Asia/Ho_Chi_Minh',
       isActive: true,
     },
   });
 
-  // 2. Tạo tài khoản quản trị viên và bác sĩ mẫu
+  // 2. Tạo tài khoản nhân sự
   const passwordHash = await bcrypt.hash('WelloraDev123!@#', 10);
 
-  const adminUser = await prisma.user.upsert({
+  await prisma.user.upsert({
     where: { email: 'admin@wellora.local' },
     update: {},
     create: {
@@ -38,7 +44,7 @@ async function main() {
     },
   });
 
-  const staffUser = await prisma.user.upsert({
+  await prisma.user.upsert({
     where: { email: 'staff@wellora.local' },
     update: {},
     create: {
@@ -49,7 +55,7 @@ async function main() {
     },
   });
 
-  const doctorUser = await prisma.user.upsert({
+  const doctorUser1 = await prisma.user.upsert({
     where: { email: 'doctor.ha@wellora.local' },
     update: {},
     create: {
@@ -60,25 +66,63 @@ async function main() {
     },
   });
 
-  // 3. Tạo thông tin Practitioner (bác sĩ)
-  const practitioner = await prisma.practitioner.upsert({
-    where: { userId: doctorUser.id },
+  const doctorUser2 = await prisma.user.upsert({
+    where: { email: 'doctor.tuan@wellora.local' },
     update: {},
     create: {
-      userId: doctorUser.id,
-      displayName: 'BS. CK1 Nguyễn Thu Hà (Dữ liệu mẫu)',
-      bio: 'Bác sĩ chuyên khoa y học gia đình và chăm sóc sức khỏe phòng ngừa. [Thông tin mẫu dùng kiểm thử].',
+      email: 'doctor.tuan@wellora.local',
+      passwordHash,
+      role: UserRole.PRACTITIONER,
+      isActive: true,
+    },
+  });
+
+  // 3. Tạo Practitioner (Bác sĩ chuyên môn) với ảnh thực tế
+  const practitioner1 = await prisma.practitioner.upsert({
+    where: { userId: doctorUser1.id },
+    update: {
+      displayName: 'BS. CK1 Nguyễn Thu Hà',
+      bio: 'Tốt nghiệp Đại học Y Dược TP.HCM với hơn 12 năm kinh nghiệm trong Y học gia đình và chăm sóc sức khỏe phòng ngừa.',
+      photoUrl: '/images/clinic/doctor-ha.jpg',
+      isBookable: true,
+      isPublished: true,
+    },
+    create: {
+      userId: doctorUser1.id,
+      displayName: 'BS. CK1 Nguyễn Thu Hà',
+      bio: 'Tốt nghiệp Đại học Y Dược TP.HCM với hơn 12 năm kinh nghiệm trong Y học gia đình và chăm sóc sức khỏe phòng ngừa.',
+      photoUrl: '/images/clinic/doctor-ha.jpg',
       isBookable: true,
       isPublished: true,
     },
   });
 
-  // 4. Tạo các dịch vụ mẫu
+  const practitioner2 = await prisma.practitioner.upsert({
+    where: { userId: doctorUser2.id },
+    update: {
+      displayName: 'ThS. BS Trần Minh Tuấn',
+      bio: 'Thạc sĩ Y khoa Đại học Y Hà Nội với hơn 15 năm kinh nghiệm chuyên sâu về Nội khoa tổng quát, quản lý bệnh mạn tính và tim mạch chuyển hóa.',
+      photoUrl: '/images/clinic/doctor-tuan.jpg',
+      isBookable: true,
+      isPublished: true,
+    },
+    create: {
+      userId: doctorUser2.id,
+      displayName: 'ThS. BS Trần Minh Tuấn',
+      bio: 'Thạc sĩ Y khoa Đại học Y Hà Nội với hơn 15 năm kinh nghiệm chuyên sâu về Nội khoa tổng quát, quản lý bệnh mạn tính và tim mạch chuyển hóa.',
+      photoUrl: '/images/clinic/doctor-tuan.jpg',
+      isBookable: true,
+      isPublished: true,
+    },
+  });
+
+  // 4. Tạo Dịch vụ với ảnh thực tế được lưu trực tiếp trong DB
   const servicesData = [
     {
       name: 'Khám sức khỏe tổng quát ban đầu',
       slug: 'kham-tong-quat',
-      description: 'Đánh giá chỉ số sinh hiệu, thăm khám lâm sàng tổng quát và tư vấn kế hoạch chăm sóc sức khỏe phòng ngừa.',
+      description: 'Đánh giá chỉ số sinh hiệu, thăm khám lâm sàng toàn diện và tư vấn kế hoạch chăm sóc sức khỏe phòng ngừa.',
+      imageUrl: '/images/clinic/service-general.jpg',
       durationMinutes: 30,
       bufferBeforeMinutes: 5,
       bufferAfterMinutes: 10,
@@ -89,6 +133,7 @@ async function main() {
       name: 'Tư vấn dinh dưỡng & lối sống lành mạnh',
       slug: 'tu-van-dinh-duong',
       description: 'Phân tích thói quen dinh dưỡng, chỉ số cơ thể và thiết lập thực đơn khoa học phù hợp với thể trạng cá nhân.',
+      imageUrl: '/images/clinic/service-nutrition.jpg',
       durationMinutes: 45,
       bufferBeforeMinutes: 5,
       bufferAfterMinutes: 10,
@@ -99,6 +144,7 @@ async function main() {
       name: 'Theo dõi chỉ số & Tái khám định kỳ',
       slug: 'theo-doi-dinh-ky',
       description: 'Đánh giá tiến triển sức khỏe, kiểm tra các chỉ số huyết áp, đường huyết định kỳ và điều chỉnh phác đồ chăm sóc.',
+      imageUrl: '/images/clinic/service-checkup.jpg',
       durationMinutes: 30,
       bufferBeforeMinutes: 5,
       bufferAfterMinutes: 5,
@@ -107,66 +153,76 @@ async function main() {
     },
   ];
 
-  const createdServices = [];
   for (const s of servicesData) {
     const service = await prisma.service.upsert({
       where: { slug: s.slug },
-      update: {},
+      update: {
+        name: s.name,
+        description: s.description,
+        imageUrl: s.imageUrl,
+        durationMinutes: s.durationMinutes,
+        bufferBeforeMinutes: s.bufferBeforeMinutes,
+        bufferAfterMinutes: s.bufferAfterMinutes,
+        priceMinor: s.priceMinor,
+        currency: s.currency,
+        isActive: true,
+        isPublished: true,
+      },
       create: {
         ...s,
         isActive: true,
         isPublished: true,
       },
     });
-    createdServices.push(service);
 
-    // Liên kết practitioner với service
-    await prisma.practitionerService.upsert({
-      where: {
-        practitionerId_serviceId: {
-          practitionerId: practitioner.id,
+    // Gán cả 2 bác sĩ cho dịch vụ này
+    for (const p of [practitioner1, practitioner2]) {
+      await prisma.practitionerService.upsert({
+        where: {
+          practitionerId_serviceId: {
+            practitionerId: p.id,
+            serviceId: service.id,
+          },
+        },
+        update: {},
+        create: {
+          practitionerId: p.id,
           serviceId: service.id,
         },
-      },
-      update: {},
-      create: {
-        practitionerId: practitioner.id,
-        serviceId: service.id,
-      },
-    });
+      });
+    }
   }
 
-  // 5. Cấu hình giờ làm việc (Thứ 2 đến Thứ 7, 08:00 - 12:00 và 13:30 - 17:30)
-  // weekday: 1 (Mon) -> 6 (Sat)
-  for (let weekday = 1; weekday <= 6; weekday++) {
-    // Sáng
-    await prisma.workingHours.create({
-      data: {
-        practitionerId: practitioner.id,
-        locationId: location.id,
-        weekday,
-        startTime: '08:00',
-        endTime: '12:00',
-      },
-    });
-    // Chiều
-    await prisma.workingHours.create({
-      data: {
-        practitionerId: practitioner.id,
-        locationId: location.id,
-        weekday,
-        startTime: '13:30',
-        endTime: '17:30',
-      },
-    });
+  // 5. Cấu hình giờ làm việc cho cả 2 bác sĩ
+  await prisma.workingHours.deleteMany({});
+  for (const p of [practitioner1, practitioner2]) {
+    for (let weekday = 1; weekday <= 6; weekday++) {
+      // Sáng: 08:00 - 12:00
+      await prisma.workingHours.create({
+        data: {
+          practitionerId: p.id,
+          locationId: location.id,
+          weekday,
+          startTime: '08:00',
+          endTime: '12:00',
+        },
+      });
+      // Chiều: 13:30 - 17:30
+      await prisma.workingHours.create({
+        data: {
+          practitionerId: p.id,
+          locationId: location.id,
+          weekday,
+          startTime: '13:30',
+          endTime: '17:30',
+        },
+      });
+    }
   }
 
   console.log('--- Seeding hoàn tất thành công! ---');
   console.log('Cơ sở:', location.name);
-  console.log('Tài khoản test:');
-  console.log('- Admin: admin@wellora.local / WelloraDev123!@#');
-  console.log('- Staff: staff@wellora.local / WelloraDev123!@#');
-  console.log('- Bác sĩ: doctor.ha@wellora.local / WelloraDev123!@#');
+  console.log('Bác sĩ:', practitioner1.displayName, ',', practitioner2.displayName);
 }
 
 main()
@@ -177,4 +233,3 @@ main()
   .finally(async () => {
     await prisma.$disconnect();
   });
-

@@ -8,8 +8,8 @@ export const CLINIC_CONFIG = {
   locations: [
     {
       id: 'center',
-      name: 'Cơ sở Trung tâm (Dữ liệu mẫu)',
-      address: '[Dữ liệu mẫu] 123 Đại Lộ Sức Khỏe, Phường Bến Nghé, Quận 1, TP. Hồ Chí Minh',
+      name: 'Cơ sở Trung tâm',
+      address: '123 Đại Lộ Sức Khỏe, Phường Bến Nghé, Quận 1, TP. Hồ Chí Minh',
       workingHours: 'Thứ 2 - Thứ 7: 08:00 - 12:00 & 13:30 - 17:30',
       sunday: 'Chủ nhật: Nghỉ',
     },

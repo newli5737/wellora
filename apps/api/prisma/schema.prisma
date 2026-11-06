@@ -93,6 +93,7 @@ model Service {
   name                String
   slug                String                @unique
   description         String?
+  imageUrl            String?
   durationMinutes     Int                   // > 0
   bufferBeforeMinutes Int                   @default(0)
   bufferAfterMinutes  Int                   @default(0)

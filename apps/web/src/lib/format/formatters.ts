@@ -64,6 +64,19 @@ export function formatTime(isoString: string): string {
   }
 }
 
+export function getServiceImage(slug?: string): string {
+  switch (slug) {
+    case 'kham-tong-quat':
+      return '/images/clinic/service-general.jpg';
+    case 'tu-van-dinh-duong':
+      return '/images/clinic/service-nutrition.jpg';
+    case 'theo-doi-dinh-ky':
+      return '/images/clinic/service-checkup.jpg';
+    default:
+      return '/images/clinic/consultation-care.jpg';
+  }
+}
+
 export function getStatusBadgeInfo(status: string): {
   label: string;
   badgeClass: string;

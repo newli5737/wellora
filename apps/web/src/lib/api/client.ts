@@ -57,6 +57,7 @@ export interface ServiceItem {
   name: string;
   slug: string;
   description: string | null;
+  imageUrl?: string | null;
   durationMinutes: number;
   priceMinor: number | null;
   currency: string;
